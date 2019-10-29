@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+       <!-- <div style="width: 1000px; margin: 0 auto;"></div>-->
+       <%= Title %>
+            <div style="width:232px; height:250px; background-color: rgb(251, 227, 219); margin-bottom:10px;">
+                <div><ul id="msg"><li style="width:230px; padding-top:20px; "></li></ul></div>
+            </div>
+        <input id="m" autocomplete="off"/>
+        <button>SEND</button>
+        <input type="button" id="list" value="selectAll 받아오기"/>
+        <script>
+            // // 제이쿼리 익명함수 실행 
+            /*io connect, form.summit -> socket.emit - 적은내용을 서버로 보내기 
+                socket.on append().txt*/
+            $(()=>{
+                const socket = io('http://localhost:5100');
+                console.log("check!!!!!")
+                $('button').click(()=>{
+                    socket.emit('chat msg', $('#m').val());
+                    $('#m').val('');
+                });
+
+                socket.on('chat msg', (msg)=>{
+                    $('#msg').append($('<li>').text(msg));
+                });
+            });
+
+            ///////////////////////////////////////////////////////
+
+            var selectList = document.getElementById('list');
+                selectList.addEventListener('click', function(event){
+                    axios.post('http://6100/selectAll',{
+                        List:'List'
+                    })
+                    .then(res=>{
+                         console.log(res);
+                    })
+                    .catch((err)=>{
+                        console.log(err)
+                    });
+
+            });
+
+        </script>
+  </body>
+</html>

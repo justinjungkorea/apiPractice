@@ -1,0 +1,25 @@
+{
+  "name": "signalling",
+  "version": "1.0.0",
+  "description": "",
+  "main": "signalServer.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon signalServer.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-session": "^1.17.0",
+    "formdata": "^0.10.4",
+    "nodemon": "^1.19.4",
+    "pg": "^7.12.1",
+    "querystring": "^0.2.0",
+    "request": "^2.88.0",
+    "socket.io": "^2.3.0",
+    "stringify": "^5.2.0"
+  }
+}
