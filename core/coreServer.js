@@ -47,7 +47,7 @@ app.post('/login', (req, res)=>{
 
 app.post('/signUp', (req, res)=>{
     console.log(req.body);
-    loginSelect(req.body.userId, req.body.userPw, res);
+    loginSelect(req.body.id, req.body.pw);
 });
 
 app.post('/pwdUpdate', (req, res)=>{
@@ -82,7 +82,6 @@ client.connect().then(()=>{
 // dummy 값일때 select
 
 function loginSelect(id, pw){
-    console.log("aaaa");
     var sql = "select count(id) as cnt from exam.user where id=$1 and password=$2"; 
     client.query(sql, [id, pw], (err, res)=>{
         if(err){
@@ -92,11 +91,11 @@ function loginSelect(id, pw){
             var cnt = Number(res.rows[0].cnt);
             if(cnt>0){
                 res.status(200).json({
-                    message: 'you are logged in!'
+                    message: 'true'
                 })
             }else{
                 res.status(200).json({
-                    message: 'invalid userinfo'
+                    message: 'false'
                 })
             }
         }
